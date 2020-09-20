@@ -1,0 +1,31 @@
+.Divider {
+  border-top: 2px solid black;
+}
+
+.form-control input {
+  color: green;
+  padding: 4px;
+  text-align: center;
+}
+
+.form-control input::placeholder {
+  color: red;
+}
+
+.hint1-center {
+  margin-top: 5px;
+  align-content: left;
+  text-align: left;
+  color: purple;
+  line-height: 100%;
+  font-size: 80%;
+}
+
+.error1-center {
+  margin-top: 5px;
+  margin-bottom: 0px;
+  text-align: left;
+  color: red;
+  line-height: 90%;
+  justify-content: space-evenly;
+}
