@@ -29,12 +29,15 @@ export const useFormValidation  = (fieldState:FormStateType )=> {
     setFormClientStatus(isFormValid(fieldState));
   }, [fieldState]);
   
+  
   useEffect(() => {
 
+	/**
     if (isSubmitting) {
           
           //let result:ServiceResponseType=handleApi();
           //axios.get("http://localhost:8000/groups/")
+	  
           getAllGroupAttributes().then(response1 => {
              if (response1.data) {
                  getAllGroups()
@@ -58,7 +61,7 @@ export const useFormValidation  = (fieldState:FormStateType )=> {
         setFormServiceError(error);
     });
     //return result;
-  };
+  };**/
 
           //setFormServiceData(result);
           //console.log(result)

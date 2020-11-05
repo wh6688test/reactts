@@ -1,10 +1,10 @@
 import React from 'react';
 //import logo from './logo.svg';
 import './App.css';
-import Footer from './Footer';
-import Header from './Header';
+import Footer from './apps/layout/Footer';
+import Header from './apps/layout/Header';
 import HeaderForm from './apps/forms/HeaderForm.tsx'
-import Body from './Body';
+import Body from './apps/layout/Body';
 import Divider from './components/commons/Divider';
 import {
   MDBNavbar, MDBRow, MDBCol, MDBBtn, MDBDataTable,

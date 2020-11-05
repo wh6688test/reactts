@@ -17,8 +17,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
-    "typescript": "~3.7.2"
+    "react-scripts": "3.4.1"
   },
   "scripts": {
     "start": "REACT_APP_STAGE=dev react-scripts start",
@@ -42,6 +41,10 @@
     ]
   },
   "devDependencies": {
-    "react-hook-form": "^5.7.2"
+    "@testing-library/cypress": "^7.0.1",
+    "@types/testing-library__cypress": "^5.0.8",
+    "cypress": "^5.5.0",
+    "react-hook-form": "^5.7.2",
+    "typescript": "^3.7.5"
   }
 }
