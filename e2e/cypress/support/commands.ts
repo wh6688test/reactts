@@ -27,8 +27,24 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 import "@testing-library/cypress";
+declare global {
+  namespace Cypress {
+
+    interface Chainable {
+     /**
+       * @returns {typeof }
+       * @memberof Cypress.Chainable
+       * @example
+       ```
+        cy.getByDataId("myselector")
+       ```
+       */
+      getByDataId: (selector: string, args?:[]) => HTMLElement;
+    }
+  }
+};
 Cypress.Commands.add("getByDataId", (selector, ...args) => {
-    return cy.get(`[data-testid]=${selector}`, ...args);
+    return cy.get(`[data-testid=${selector}]`, ...args);
   }
 );
 

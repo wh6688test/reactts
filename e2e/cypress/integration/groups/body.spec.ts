@@ -1,28 +1,22 @@
 /// <reference types="cypress" />
+
+import { isNull } from "cypress/types/lodash"
+
 //@ts-check
-describe('Waiting', () => {
+describe('Test Body iframe', () => {
   beforeEach(() => {
     cy.visit('/')
   })
   
-
-  it('Verify Body Contents', () => {
-
-       //make sure svg image is attached
-      
-       cy.getByDataId("upper scroll").scrollTo("top").should("be.ok");
-       cy.getByDataId("upper scroll").scrollTo("bottom").should("be.ok")
-       cy.get('svg').as('img').should('have.length', 1);
-       cy.get('@img1').its('title').should('have.text', "title text");
-       cy.get('@img').scrollIntoView().should("be.visible")
-           .should('have.class', 'btn-success')
-           .and('contain', 'Changed')
-           .and('have.css', 'cssProperty')
-           .and("have.attr", 'attr');
-       
+  it('svg image is visible', () => {
+       //make sure attachment is svg file
+       cy.get('embed').then(iframe1 => {
+        
+        expect(iframe1.length).equal(1);
+        expect(iframe1.get(0).src).contain('svg');
+        expect(iframe1.get(0).title).eq('svg image');
+        //add check to make sure the image is loaded
+       })
   })
 })
-
-
-//add a screen shot test
 

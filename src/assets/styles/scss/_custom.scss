@@ -3,7 +3,7 @@
 };
 
 .Divider {
-  @include hr-style(black, solid,  2px);
+  @include hr-style(blue, solid,  3px);
 };
 
 .form-control input {

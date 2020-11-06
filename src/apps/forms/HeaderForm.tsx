@@ -289,7 +289,7 @@ const HeaderForm = () => {
 </MDBFormInline>
 
 </MDBContainer>
-<Divider/>
+
 <MDBContainer className="fluid">
 
   <MDBRow center className="error1-center">

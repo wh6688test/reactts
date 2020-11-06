@@ -10,7 +10,7 @@ Reference Info :
 
    4. Visual testing :  https://docs.percy.io/docs/cypress  and Applitools (eyes)
 
-
+   5.  https://basarat.gitbook.io/typescript/intro-1/cypress
 
 4.  https://github.com/cypress-io/code-coverage
 

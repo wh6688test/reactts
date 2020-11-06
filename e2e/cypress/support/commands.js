@@ -29,5 +29,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 require("@testing-library/cypress");
 Cypress.Commands.add("getByDataId", (selector, ...args) => {
-    return cy.get(`[data-testid]=${selector}`, ...args);
+    return cy.get(`[data-testid=${selector}]`, ...args);
 });

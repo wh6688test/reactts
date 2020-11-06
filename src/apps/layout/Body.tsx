@@ -1,17 +1,19 @@
 import React from 'react';
-import { Container, Nav, NavItem, Navbar, Form, InputGroup, FormControl, Button } from 'react-bootstrap';
-import './Body.css';
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Divider from '../../components/commons/Divider';
 
 function Body(/*props*/) {
     return (
-       <div style={{ width: 'auto', height: 'auto' }}>
+       <>
+       <div style={{overflow:'scroll'}}>
           <ResponsiveEmbed aspectRatio="16by9">
-             <embed type="image/svg+xml" src="/logo.svg" />
+             <embed type="image/svg+xml" title="svg image" src="/my.svg" />
           </ResponsiveEmbed>
        </div>
+          <Divider/>
+       </>
     );
 }
 
