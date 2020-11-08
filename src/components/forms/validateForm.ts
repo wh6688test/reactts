@@ -1,4 +1,4 @@
-import {ValueType, ErrorType} from './FormTypes';
+import {ValueType, ErrorType} from './formTypes';
 
 export default function validate(values:ValueType) :ErrorType{
 

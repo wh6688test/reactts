@@ -1,6 +1,6 @@
 import React from 'react';
-import { Container, Nav, NavItem, Navbar } from 'react-bootstrap';
-import './Footer.css';
+import { Nav, NavItem, Navbar } from 'react-bootstrap';
+import '../../assets/styles/scss/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Footer(/*props*/) {
@@ -26,7 +26,7 @@ function Footer(/*props*/) {
             Reference links
             </Nav.Link>
           </NavItem>
-          <NavItem data-testid="footer_note" className="text-right item-right small copyright Footer-link Footer-position">© WHSU 2020</NavItem>
+          <NavItem data-testid="footer_note" className="small copyright">© WHSU 2020</NavItem>
         </Nav>
        </Navbar>
       </footer>

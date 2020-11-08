@@ -2,7 +2,7 @@
 //https://medium.com/@trekinbami/using-environment-variables-in-react-6b0a99d83cf5
 import {properties} from '../properties/app';
 import axios from 'axios';
-import { ValueType, ErrorType, FormStateType, ServiceResponseType, JsonServiceType} from '../../components/forms/FormTypes';
+import { ValueType, ErrorType, FormStateType, ServiceResponseType, JsonServiceType} from '../../components/forms/formTypes';
 
 export const getAllGroups = ():Promise<any> => {
 

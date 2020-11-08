@@ -3,7 +3,7 @@ import { isFormValid, setBootStrapFormValid, handleApi} from '../../apps/forms/u
 //https://github.com/Upmostly/custom-react-hooks-form-validation
 
 import { useState, useEffect} from 'react';
-import { ValueType, ErrorType, FormStateType, ServiceResponseType, JsonServiceType} from './FormTypes';
+import { ValueType, ErrorType, FormStateType, ServiceResponseType, JsonServiceType} from './formTypes';
 //import axios from 'axios';
 import {getAllGroups} from '../../apps/services/GroupService';
 

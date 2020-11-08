@@ -1,5 +1,5 @@
 
-import { ErrorType, CallBackType, ServiceResponseType, JsonServiceType, FormStateType} from '../../components/forms/FormTypes';
+import { ErrorType, CallBackType, ServiceResponseType, JsonServiceType, FormStateType} from '../../components/forms/formTypes';
 //import {ServiceStatusType} from '../../common/Type.d.ts';
 import { listenerCount } from 'process';
 import axios from 'axios';
@@ -56,11 +56,15 @@ const submitHandler = (event: => {
   };
 
   export const isFormValid  = (state:FormStateType):boolean => {
-     
-      const invalidForm=Object.keys(state).some(key => {
-         return !(state[key].error || state[key].error.length!==0)
-      })
-      return !invalidForm
+       
+       if (Object.keys(state).some(key => 
+         !!state[key].error || state[key].error.length !== 0
+       ))  {
+         return false;
+       }
+
+       return true;
+
      //2. if valid form, add className and enable submit, else disable submit
 
      
@@ -74,12 +78,13 @@ const submitHandler = (event: => {
       target.className +=' was-validated';
     
   }
-
+  const HINT="Please enter valid input";
+  
   export const ClientHints = {
-  HINT1: 'Please enter valid input1',
-  HINT2: 'please enter valid input2',
-  HINT3: 'Please enter valid input3',
-  HINT4: 'Please enter valid input4',
+  HINT1: HINT+'1',
+  HINT2: HINT+'2',
+  HINT3: HINT+'3',
+  HINT4: HINT+'4',
 };
 
 export const ClientErrors = {

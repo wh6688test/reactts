@@ -1,6 +1,9 @@
+//note : mdb does not support typescript types : should have picked other UI libraries working with typescripts
+//workaround : "noImplicitAny": false in tsconfig.json
+
 import React from 'react';
-import { Container, Nav, NavItem, Navbar, Form, InputGroup, FormControl, Button } from 'react-bootstrap';
-import './Header.css';
+import { Navbar, Form, InputGroup, FormControl, Button } from 'react-bootstrap';
+import '../../assets/styles/scss/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Header(/*props*/) {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../assets/styles/css/App.css';
+import '../../assets/styles/scss/App.scss';
 
 const Divider = () => {
     return <hr className='Divider'/>

@@ -15,11 +15,11 @@ import {
 
 import {useFieldsValidation} from '../../components/forms/useFieldsValidation';
 import {useFormValidation} from '../../components/forms/useFormValidation';
-import {ValidationRules, ErrorType,ValueType, JsonServiceType, FormStateType, FieldStateType, MemberType} from '../../components/forms/FormTypes';
+import {ValidationRules, ErrorType,ValueType, JsonServiceType, FormStateType, FieldStateType, MemberType} from '../../components/forms/formTypes';
 
 import { ClientHints, handleApi, ClientErrors, isFormValid } from './utils';
 import Divider from '../../components/commons/Divider';
-import MemberComponent from './MemberComponent';
+import MemberComponent from './Member';
 
 const HeaderForm = () => {
 

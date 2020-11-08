@@ -12,20 +12,22 @@
   color: red;
 }
 
-.hint1-center {
+.hint-center {
+  display: inline-block;
   margin-top: 5px;
-  align-content: left;
-  text-align: left;
-  color: purple;
+  align-content: center;
+  text-align: center;
+  text-justify: left;
+  align-items: left;
   line-height: 100%;
   font-size: 80%;
 }
 
-.error1-center {
-  margin-top: 5px;
-  margin-bottom: 0px;
+div.myerror {
+  margin: 5px;
   text-align: left;
+  text-justify: left;
+  line-height: 100%;
   color: red;
-  line-height: 90%;
   justify-content: space-evenly;
 }

@@ -9,17 +9,18 @@
 //filed validation
 //display json data : https://forum.freecodecamp.org/t/accessing-json-object-within-an-object/171447/3
 import React from 'react';
+
 import {
-  MDBContainer, MDBNavbar, MDBRow, MDBCol, MDBBtn, MDBNavbarBrand, MDBNavbarToggler, MDBCollapse, MDBNavbarNav, MDBDataTable, MDBDataTableV5, MDBFormInline
+  MDBContainer, MDBRow, MDBCol, MDBBtn, MDBDataTableV5, MDBFormInline
 } from 'mdbreact';
 
 import {useFieldsValidation} from '../../components/forms/useFieldsValidation';
 import {useFormValidation} from '../../components/forms/useFormValidation';
-import {ValidationRules, ErrorType,ValueType, JsonServiceType, FormStateType, FieldStateType, MemberType} from '../../components/forms/FormTypes';
+import {ValidationRules, ErrorType,ValueType, JsonServiceType, FormStateType, FieldStateType, MemberType} from '../../components/forms/formTypes';
 
-import { ClientHints, handleApi, ClientErrors, isFormValid } from './utils';
-import Divider from '../../components/commons/Divider';
-import MemberComponent from './MemberComponent';
+import { ClientHints, handleApi, ClientErrors, isFormValid} from './utils';
+//import Divider from '../../components/commons/Divider';
+//import MemberComponent from './MemberComponent';
 
 const HeaderForm = () => {
 
@@ -95,11 +96,11 @@ const HeaderForm = () => {
         group_attr1: group_attr1,
         group_attr2: group_attr2, 
         }];
-  let allobject1:Object={};
-  allobject1={group_id: groupId,
+        /** 
+  let allobject1:Object={group_id: groupId,
         group_attr1: group_attr1,
         group_attr2: group_attr2
-       };
+       };**/
   let allobject:any[]=[];
         //group_attr1: group_attr1,
         //group_attr2: group_attr2);
@@ -259,31 +260,41 @@ const HeaderForm = () => {
   **/
   return (
   <>
-    <MDBContainer className="fluid" color="deep-purple">
+    <MDBContainer className="fluid">
      <MDBFormInline className="md-form md-auto py-3 needs-validation text-black darken-3" expand="md" onSubmit={handleOnSubmit} noValidate id="wform1">
-        <MDBRow between>
-          <MDBCol md="2" className="ml-2">
+        <MDBRow>
+          <MDBCol>
+           
             <input className="form-control" type="text" id="input1" name="input1" value={fieldState.input1.value} placeholder="input1" pattern="^[a-zA-Z0-9_]+$" minLength={4} maxLength={5} required={true} onChange={handleOnChange} onBlur={handleOnBlur} onClick={handleOnClick} />
-            {(!fieldState.input1.error && fieldState.input1.value.length===0) && <div className="hint1-center">{fieldState.input1.value}{ClientHints.HINT1}</div>}
-            {fieldState.input1.error.length > 0 && fieldState.input1.error.split(" ").map((d:string, i:number) =><div className="text-align error1-center" key={i}>{d}</div>)}
+            {(!fieldState.input1.error && fieldState.input1.value.length===0) && <label className="hint-center">{fieldState.input1.value}{ClientHints.HINT1}</label>}
+            {(!!fieldState.input1.error || fieldState.input1.error.length>0 ) && fieldState.input1.error.split("\n").map((d:string, i:number) =><div className="error-center" key={i}>{d}</div>)}
+        
           </MDBCol>
-          <MDBCol md="2" className="ml-2">
+          <MDBCol>
+         
             <input className="form-control" type="text" id="input2" name="input2" value={fieldState.input2.value} placeholder="input2" onChange={handleOnChange} minLength={2} maxLength={5} onBlur={handleOnBlur} onClick={handleOnClick}/>
-             {(!fieldState.input2.error && fieldState.input2.value.length===0) && <div className="hint2-center">{fieldState.input2.value}{ClientHints.HINT2}</div>}
-             {fieldState.input2.error.length > 0 && fieldState.input2.error.split(" ").map((d:string, i:number) =><div className="text-align error1-center" key={i}>{d}</div>)}
+             {(!fieldState.input2.error && fieldState.input2.value.length===0) && <label className="hint-center" color="green">{fieldState.input2.value}{ClientHints.HINT2} </label>}
+             {(!!fieldState.input2.error || fieldState.input2.error.length>0) && fieldState.input2.error.split("\n").map((d:string, i:number) =><div className="error-center" key={i}>{d}</div>)}
+          
           </MDBCol>
-          <MDBCol md="2" className="ml-2">
+          <MDBCol>
+        
              <input className="form-control" type="text" id="input3" name="input3" value={fieldState.input3.value} placeholder="input3" required maxLength={15} onChange={handleOnChange} onBlur={handleOnBlur} onClick={handleOnClick}/>
-            {(!fieldState.input3.error && fieldState.input3.value.length===0) && <div className="hint3-center">{fieldState.input3.value}{ClientHints.HINT3}</div>}
-             {fieldState.input3.error.length > 0 && fieldState.input3.error.split(" ").map((d:string, i:number) =><div className="text-align error1-center" key={i}>{d}</div>)}
+            {(!fieldState.input3.error && fieldState.input3.value.length===0) && <label className="hint-center">{fieldState.input3.value}{ClientHints.HINT3}</label>}
+             {(!!fieldState.input3.error || fieldState.input3.error.length > 0) && fieldState.input3.error.split("\n").map((d:string, i:number) =><div className="error-center" key={i}>{d}</div>)}
+           
            </MDBCol>
-          <MDBCol md="2" className="ml-2">
-            <input className="form-control" type="text" id="invalidCheck" name="input4" value={fieldState.input4.value} placeholder="input4" maxLength={5} onChange={handleOnChange} onBlur={handleOnBlur} onClick={handleOnClick} />
-            {(!fieldState.input4.error && fieldState.input4.value.length===0) && <div className="hint4-center">{fieldState.input4.value}{ClientHints.HINT4}</div>}
-            {fieldState.input4.error.length > 0 && fieldState.input4.error.split(" ").map((d:string, i:number) =><div className="text-align error1-center" key={i}>{d}</div>)}
+          <MDBCol>
+           
+            <input className="form-control" type="text" id="input4" name="input4" value={fieldState.input4.value} placeholder="input4" maxLength={5} onChange={handleOnChange} onBlur={handleOnBlur} onClick={handleOnClick} />
+            {(!fieldState.input4.error && fieldState.input4.value.length===0) && <label className="hint-center" color="purple">{fieldState.input4.value}{ClientHints.HINT4}</label>}
+            {(!!fieldState.input4.error || fieldState.input4.error.length > 0) && fieldState.input4.error.split("\n").map((d:string, i:number) =><div color="red" className="error-center" key={i}>{d}</div>)}
+        
           </MDBCol>
-          <MDBCol md="3" className="ml-3">
-                <MDBBtn color="primary" type="submit" name="submit" disabled={formClientStatus}>Submit</MDBBtn>
+          <MDBCol>
+         
+                <MDBBtn class="button" color="primary" type="submit" name="submit" disabled={!formClientStatus}>Submit</MDBBtn>
+              
           </MDBCol>
         </MDBRow>
 </MDBFormInline>

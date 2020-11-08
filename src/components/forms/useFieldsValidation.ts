@@ -1,7 +1,7 @@
 import { useState} from 'react';
 import  {ClientErrors} from '../../apps/forms/utils';
 
-import {ErrorType,ValueType, ValidationRules, FieldStateType, FormStateType} from './FormTypes';
+import {ErrorType,ValueType, ValidationRules, FieldStateType, FormStateType} from './formTypes';
 
 export const useFieldsValidation  = (initialStates: FormStateType) => {
   // for field validation
@@ -29,7 +29,7 @@ export const useFieldsValidation  = (initialStates: FormStateType) => {
              
                 //currentErrors[name].push(ClientErrors.REQUIRED);
                 //setErrors(currentErrors)
-                error +=" "+ClientErrors.REQUIRED;
+                error +="\n"+ClientErrors.REQUIRED;
             
       }
 
@@ -40,7 +40,7 @@ export const useFieldsValidation  = (initialStates: FormStateType) => {
         
           //if( (!pattern1.test(value.trim()) && !currentErrors[name].includes(ClientErrors.PATTERN) ) ) {
           
-            error +=" "+ClientErrors.PATTERN;
+            error +="\n"+ClientErrors.PATTERN;
               //setFieldValid(false);
               //currentErrors[name].push(ClientErrors.PATTERN);
               //setErrors(currentErrors);
@@ -81,14 +81,14 @@ export const useFieldsValidation  = (initialStates: FormStateType) => {
                  // ...prevState,
                  // [name]: currentErrors,
               //}))
-              error +=" "+ClientErrors.MIN;
+              error +="\n"+ClientErrors.MIN;
     
       }
        if (validationRules['maxLength'] && validationRules['maxLength'] > 0 && value.trim().length > validationRules['maxLength'] ) {
                 //setFieldValid(false);
                 //currentErrors[name].push(ClientErrors.MAX);
                 //setErrors(currentErrors);
-             error +=" "+ClientErrors.MAX;
+             error +="\n"+ClientErrors.MAX;
       }
       
       //return {isValid, errors};
