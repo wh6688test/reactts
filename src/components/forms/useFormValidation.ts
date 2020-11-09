@@ -22,16 +22,14 @@ export const useFormValidation  = (fieldState:FormStateType )=> {
 
   //const {fieldStates, setClientStatus, handleOnChange}
   //= validateFields(fieldValidateRule, initialFieldStates);
-  useEffect(() => {
-    //if (Object.keys(errors).length === 0 && isSubmitting) {
-      //isFormValid(errors)
-    setFormClientStatus(false);
-  }, []);
+  
 
   useEffect(() => {
     //if (Object.keys(errors).length === 0 && isSubmitting) {
       //isFormValid(errors)
+    //let formValid=false;
     setFormClientStatus(isFormValid(fieldState));
+    //setFormClientStatus(formValid);
   }, [fieldState]);
   
   

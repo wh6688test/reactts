@@ -31,12 +31,12 @@ const HeaderForm = () => {
   };
 
   const initialStates = {
-    input1: {value: "", error:""},
-    input2: {value: "", error:""},
-    input3: {value: "", error:""},
-    input4: {value: "", error:""},
+    input1: {value: "", error:"", dirty:false},
+    input2: {value: "", error:"", dirty:false},
+    input3: {value: "", error:"", dirty:false},
+    input4: {value: "", error:"", dirty:false},
   };
-  const initialFieldStates = {value:"", error:""};
+  const initialFieldStates = {value:"", error:"", dirty:false};
   
   const fieldValidationRules = {
     input1: {
@@ -64,7 +64,7 @@ const HeaderForm = () => {
     },
   };
       
-  const {fieldState, handleOnChange, handleOnBlur, handleOnClick}=useFieldsValidation(initialStates);
+  const {isInitial, fieldState, handleOnChange, handleOnBlur, handleOnClick}=useFieldsValidation(initialStates);
 
   const {formClientStatus, handleOnSubmit,isSubmitting, formServiceError, formServiceData,}=useFormValidation(fieldState);
   const groupId=formServiceData.map( (data1, i) => (

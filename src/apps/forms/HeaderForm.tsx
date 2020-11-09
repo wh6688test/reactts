@@ -24,6 +24,7 @@ import { ClientHints, handleApi, ClientErrors, isFormValid} from './utils';
 
 const HeaderForm = () => {
 
+
   const initialErrors = {
     input1: [],
     input2: [],
@@ -32,12 +33,13 @@ const HeaderForm = () => {
   };
 
   const initialStates = {
-    input1: {value: "", error:""},
-    input2: {value: "", error:""},
-    input3: {value: "", error:""},
-    input4: {value: "", error:""},
+    input1: {value: "", error:"", dirty:false},
+    input2: {value: "", error:"", dirty:false},
+    input3: {value: "", error:"", dirty:false},
+    input4: {value: "", error:"", dirty:false},
   };
-  const initialFieldStates = {value:"", error:""};
+
+  let initialFieldStates = {value:"", error:"", dirty:false};
   
   const fieldValidationRules = {
     input1: {
@@ -65,11 +67,11 @@ const HeaderForm = () => {
     },
   };
       
-  const {fieldState, handleOnChange, handleOnBlur, handleOnClick}=useFieldsValidation(initialStates);
+  const {isInitial, fieldState, handleOnChange, handleOnBlur, handleOnClick}=useFieldsValidation(initialStates);
 
+  //let {formClientStatus, handleOnSubmit, isSubmitting, formServiceError, formServiceData}={false, null, false, {}, {}};
+  let {formClientStatus, handleOnSubmit, isSubmitting, formServiceError, formServiceData} = useFormValidation(fieldState);
   
-  let {formClientStatus, handleOnSubmit,isSubmitting, formServiceError, formServiceData}=useFormValidation(fieldState);
-
   const groupId=formServiceData.map( (data1, i) => (
        formServiceData[i].group_id
        //Object.keys(formServiceData).map((key) => (
@@ -287,14 +289,14 @@ const HeaderForm = () => {
            </MDBCol>
           <MDBCol>
            
-            <input className="form-control" type="text" id="input4" name="input4" value={fieldState.input4.value} placeholder="input4" maxLength={5} onChange={handleOnChange} onBlur={handleOnBlur} onClick={handleOnClick} />
+            <input className="form-control" type="text" id="input4" name="input4" value={fieldState.input4.value} placeholder="input4" minLength={1} maxLength={5} onChange={handleOnChange} onBlur={handleOnBlur} onClick={handleOnClick} />
             {(!fieldState.input4.error && fieldState.input4.value.length===0) && <label className="hint-center" color="purple">{fieldState.input4.value}{ClientHints.HINT4}</label>}
             {(!!fieldState.input4.error || fieldState.input4.error.length > 0) && fieldState.input4.error.split("\n").map((d:string, i:number) =><div color="red" className="error-center" key={i}>{!!d && d.trim().length>0 && d.trim()}</div>)}
         
           </MDBCol>
           <MDBCol>
          
-                <MDBBtn class="button" color="primary" type="submit" name="submit" disabled={!formClientStatus||false}>Submit</MDBBtn>
+                <MDBBtn color="primary" type="submit" name="submit" disabled={isInitial?true:!formClientStatus}>Submit</MDBBtn>
               
           </MDBCol>
         </MDBRow>

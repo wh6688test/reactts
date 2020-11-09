@@ -58,12 +58,7 @@ const submitHandler = (event: => {
   export const isFormValid  = (state:FormStateType):boolean => {
        
        if (Object.keys(state).some(key => 
-         !!state[key].error || state[key].error.length !== 0
-       ))  {
-         return false;
-       }
-       if (Object.keys(state).every(key => 
-         !!state[key].value || state[key].value.length !== 0
+         !!state[key].error || state[key].error.length !== 0 || !state[key].dirty
        ))  {
          return false;
        }

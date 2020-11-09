@@ -23,6 +23,7 @@ export interface ServiceDataType {
 export interface FieldStateType {
    value:string, 
    error:string,
+   dirty:boolean;
   //input1: {value:string, error:string},
   //input2: {value:string, error:string},
   //input3: {value:string, error:string},

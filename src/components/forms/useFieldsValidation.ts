@@ -5,7 +5,8 @@ import {ErrorType,ValueType, ValidationRules, FieldStateType, FormStateType} fro
 
 export const useFieldsValidation  = (initialStates: FormStateType) => {
   // for field validation
-  
+  const [isInitial, setIsInitial] = useState(true);
+
   const [fieldState, setFieldState] = useState<FormStateType>(initialStates);
   //const [errors, setErrors]= useState<ErrorType>(initialErrors);
   //const [fieldValid, setFieldValid] = useState(true);
@@ -14,16 +15,21 @@ export const useFieldsValidation  = (initialStates: FormStateType) => {
   // for form client side validation
   //const [isUpdated, setIsUpdated] = useState(false);
   
+
   const validateField=(e: React.FormEvent<HTMLInputElement>) : void => {
-      
+
       let name:string =e.currentTarget.name, value:string=e.currentTarget.value;
       //let currentErrors:ErrorType=initialErrors;
 
       let validationRules:ValidationRules = {"name": name, "value":value, "minLength":e.currentTarget.minLength, "maxLength":e.currentTarget.maxLength, "required":e.currentTarget.required, "pattern":e.currentTarget.pattern};
   
       let error="";
-      const pattern1=new RegExp(validationRules.pattern);
+      let dirty=false;
 
+      const pattern1=new RegExp(validationRules.pattern);
+      if (!validationRules["required"] || (!!value) || (!!error)) {
+        dirty=true;
+      }
       if ( validationRules["required"] && (!value || value.trim()==="")) {
           //if (!value || value.trim()==="" && !currentErrors[name].includes(ClientErrors.REQUIRED)) {
              
@@ -95,16 +101,17 @@ export const useFieldsValidation  = (initialStates: FormStateType) => {
       //return errors;
       setFieldState(prevState => ({
         ...prevState,
-        [name]: {value, error},
+        [name]: {value, error, dirty},
       }))
 
-  }
+  };
 
   //const updateField = (event:React.FormEvent<HTMLInputElement>) => {
   const handleOnChange = (e:React.FormEvent<HTMLInputElement>) => {
    
    // let name:string=e.currentTarget.name;
     //let value:string=e.currentTarget.value;
+    setIsInitial(false);
 
     if (e) {
       e.persist();
@@ -224,7 +231,7 @@ export const useFieldsValidation  = (initialStates: FormStateType) => {
   };
 
   return {
-     fieldState, handleOnChange, handleOnBlur, handleOnClick
+     isInitial, fieldState, handleOnChange, handleOnBlur, handleOnClick
   } as const;
 
 };
