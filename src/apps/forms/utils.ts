@@ -62,6 +62,11 @@ const submitHandler = (event: => {
        ))  {
          return false;
        }
+       if (Object.keys(state).every(key => 
+         !!state[key].value || state[key].value.length !== 0
+       ))  {
+         return false;
+       }
 
        return true;
 

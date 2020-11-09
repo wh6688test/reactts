@@ -2,9 +2,8 @@
 
 # dependencies
 /node_modules
-node_modules/
-e2e/node_modules
-e2e/node_modules/
+/e2e/node_modules
+/e2e/cypress/integration/examples
 
 /.pnp
 .pnp.js
