@@ -1,41 +1,40 @@
+//import { getAllGroups } from './../../../.history/src/apps/services/GroupService_20201107113904';
 
 //https://medium.com/@trekinbami/using-environment-variables-in-react-6b0a99d83cf5
 import {properties} from '../properties/app';
-import axios from 'axios';
-import { ValueType, ErrorType, FormStateType, ServiceResponseType, JsonServiceType} from '../../components/forms/formTypes';
+import axiosInstance1 from './serviceConfig';
+import { ServiceResponseType} from '../../types/myFormTypes';
 
-export const getAllGroups = ():Promise<any> => {
+export const getAllGroups = async ():Promise<ServiceResponseType> => {
+   
+     return await axiosInstance1.get("/groups").then (response => {
+            return {code:response.status, error: "", data:response.data};
+     }
 
-   return axios.get(properties.baseUrl+"/groups/").then (response => {
-             return response.data;
+    ).catch(err=> {
+      //Response.
+      //return {code: err.status, data: [{"group_id":"1", "group_attribute":{"attr1":"group1", "attr2":"group2"}}], error:err};
+       return {code: err.status, data: [], error:err};
+      
    });
-};
+}
 
 export const getAllGroupAttributes = ():Promise<any> => {
 
-   return axios.get(properties.baseUrl+"/groups/attributes").then (response => {
+   return axiosInstance1.get("/groups/attributes").then (response => {
              return response;
    });
 };
 
 export const getByMemberId = (memberId:string):Promise<any> => {
-  return axios.get(properties.baseUrl+"/group/member/"+memberId);
+  return axiosInstance1.get("/group/member/"+memberId);
 };
 
 export const createGroup = (groupData:Object) => {
-  axios.post(properties.baseUrl+"/group/", groupData);
+  axiosInstance1.post("/group", groupData);
 
 }
 
 export const updateMemberRating = (groupId:string, updateData:Object ) => {
-  axios.put(properties.baseUrl+"/group/"+groupId+"/attr/", updateData);
+  axiosInstance1.put(properties.baseUrl+"/group/"+groupId+"/attr/", updateData);
 }
-/** 
-export default {
-
-    getAllGroups,
-    getByMemberId,
-    createGroup,
-    updateMemberRating
-    
-}**/

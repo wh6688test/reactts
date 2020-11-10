@@ -1,0 +1,44 @@
+.Divider {
+  border-top: 3px solid blue;
+}
+
+input::placeholder {
+  color: green;
+  text-align: center;
+}
+
+.errorDisplay {
+  color: red;
+  text-align: center;
+}
+
+.hint-center {
+  display: inline-block;
+  margin: 5px;
+  align-content: center;
+  text-align: center;
+  text-justify: center;
+  align-items: center;
+  line-height: 100%;
+  font-size: 80%;
+  color: purple;
+}
+
+.error-center {
+  margin: 5px;
+  text-align: center;
+  text-justify: center;
+  line-height: 100%;
+  font-size: 80;
+  color: red;
+  justify-content: space-evenly;
+}
+
+.Foot {
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+}

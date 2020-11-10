@@ -8,7 +8,7 @@
 //https://stackoverflow.com/questions/54633690/how-can-i-use-multiple-refs-for-an-array-of-elements-with-hooks
 //filed validation
 //display json data : https://forum.freecodecamp.org/t/accessing-json-object-within-an-object/171447/3
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   MDBContainer, MDBRow, MDBCol, MDBBtn, MDBDataTableV5, MDBFormInline
@@ -16,21 +16,25 @@ import {
 
 import {useFieldsValidation} from '../../components/forms/useFieldsValidation';
 import {useFormValidation} from '../../components/forms/useFormValidation';
-import {ValidationRules, ErrorType,ValueType, JsonServiceType, FormStateType, FieldStateType, MemberType} from '../../components/forms/formTypes';
+//import {FormStateType, FieldStateType, MemberType} from '../../types/myFormTypes';
 
-import { ClientHints, handleApi, ClientErrors, isFormValid} from './utils';
+import { ClientHints} from './utils';
 //import Divider from '../../components/commons/Divider';
+import ErrorPage from '../layout/ErrorPage';
+import Divider from '../../components/commons/Divider';
+
 //import MemberComponent from './MemberComponent';
 
-const HeaderForm = () => {
 
-
+const MainForm = () => {
+  
+/** 
   const initialErrors = {
     input1: [],
     input2: [],
     input3: [],
     input4: []
-  };
+  };**/
 
   const initialStates = {
     input1: {value: "", error:"", dirty:false},
@@ -70,8 +74,9 @@ const HeaderForm = () => {
   const {isInitial, fieldState, handleOnChange, handleOnBlur, handleOnClick}=useFieldsValidation(initialStates);
 
   //let {formClientStatus, handleOnSubmit, isSubmitting, formServiceError, formServiceData}={false, null, false, {}, {}};
-  let {formClientStatus, handleOnSubmit, isSubmitting, formServiceError, formServiceData} = useFormValidation(fieldState);
-  
+  let {formClientStatus, handleOnSubmit, isSubmitting, formServiceStatus, formServiceError, formServiceData} = useFormValidation(fieldState);
+ 
+  /** 
   const groupId=formServiceData.map( (data1, i) => (
        formServiceData[i].group_id
        //Object.keys(formServiceData).map((key) => (
@@ -100,6 +105,8 @@ const HeaderForm = () => {
         group_attr1: group_attr1,
         group_attr2: group_attr2, 
         }];
+**/
+
         /** 
   let allobject1:Object={group_id: groupId,
         group_attr1: group_attr1,
@@ -117,7 +124,7 @@ const HeaderForm = () => {
   
    
 
-  members2.map( (m, i) => (Object.keys(members2[i]).map(k=>(members.push({member_id:members2[i][k].member_id, rating:members2[i][k].rating})))));
+  //members2.map( (m, i) => (Object.keys(members2[i]).map(k=>(members.push({member_id:members2[i][k].member_id, rating:members2[i][k].rating})))));
   //allobject=members;
     /** 
    allobject=[{group_id: groupId,
@@ -132,7 +139,7 @@ const HeaderForm = () => {
         group_attr2: group_attr2,
         members[0]
        }**/
-  allobject=members;
+  //allobject=members;
 
   const datatable={
      columns : [
@@ -184,7 +191,8 @@ const HeaderForm = () => {
        [allobject]
   }
 
-  /** 
+/** 
+  
   let datalist:JsonServiceType[]=[];
   for (let key1 in formServiceData) {
         let data1:JsonServiceType;
@@ -261,6 +269,7 @@ const HeaderForm = () => {
     
   });
   **/
+  
   return (
   <>
     <MDBContainer className="fluid">
@@ -296,28 +305,22 @@ const HeaderForm = () => {
           </MDBCol>
           <MDBCol>
          
-                <MDBBtn color="primary" type="submit" name="submit" disabled={isInitial?true:!formClientStatus}>Submit</MDBBtn>
+                <MDBBtn color="primary" type="submit" name="submit" onClick={handleOnSubmit} disabled={(isInitial?true:!formClientStatus) && !isSubmitting}>Submit</MDBBtn>
               
           </MDBCol>
         </MDBRow>
 </MDBFormInline>
+ </MDBContainer>
 
-</MDBContainer>
-
-<MDBContainer className="fluid">
-
-  <MDBRow center className="error-center">
-          <div className="w-200"></div>
-            { formServiceError ||  formServiceError.length>0 && <div className="invalid-feedback">{formServiceError}</div>}
-  </MDBRow>
+   {!isSubmitting && !formServiceError && formServiceData.length!==0 && <MDBDataTableV5 hover striped bordered data={datatable}/>}
+  
+   { (formServiceError ||  formServiceError.length>0) && <ErrorPage/>}
+  
 
 
-{!isSubmitting && !formServiceError && formServiceData.length!==0 &&
-  <MDBDataTableV5 hover striped bordered data={datatable}/>}
-   
-</MDBContainer>
 </>
 
-  );
+  )
 }
-export default HeaderForm;
+
+export default MainForm;

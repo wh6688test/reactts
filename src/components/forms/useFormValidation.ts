@@ -1,22 +1,25 @@
-import { isFormValid, setBootStrapFormValid, handleApi} from '../../apps/forms/utils';
+import { isFormValid, getInputData, handleApi} from '../../apps/forms/utils';
 //https://upmostly.com/tutorials/form-validation-using-custom-react-hooks
 //https://github.com/Upmostly/custom-react-hooks-form-validation
 
 import { useState, useEffect} from 'react';
-import { ValueType, ErrorType, FormStateType, ServiceResponseType, JsonServiceType} from './formTypes';
+import { FormStateType, ServiceDataType, ServiceResponseType} from '../../types/myFormTypes';
+//import axios from "axios";
+//import {axiosInstance} from "../../"
+
 //import axios from 'axios';
-import {getAllGroups} from '../../apps/services/GroupService';
+//import {getAllGroups} from '../../apps/services/GroupService';
 
 export const useFormValidation  = (fieldState:FormStateType )=> {
 
-  //const [states, setStates] = useState(initialFieldStates);
-   //const [errors, setErrors] = useState([]);
   
-  const [isSubmitting, setIsSubmitting] = useState(false);
+   //const [errors, setErrors] = useState([]);
+  const [inputData, setInputData] = useState([]);
   const [formClientStatus, setFormClientStatus] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formServiceError, setFormServiceError] = useState("");
   const [formServiceStatus, setFormServiceStatus] = useState(-1);
-  const [formServiceData, setFormServiceData] = useState<JsonServiceType[]>(
+  const [formServiceData, setFormServiceData] = useState<ServiceDataType[]>(
                               []);
                           
 
@@ -28,63 +31,38 @@ export const useFormValidation  = (fieldState:FormStateType )=> {
     //if (Object.keys(errors).length === 0 && isSubmitting) {
       //isFormValid(errors)
     //let formValid=false;
+    
     setFormClientStatus(isFormValid(fieldState));
+    setInputData(getInputData(fieldState));
+  
     //setFormClientStatus(formValid);
   }, [fieldState]);
   
-  
+  /**
   useEffect(() => {
-
-	/**
+    
     if (isSubmitting) {
-          
-          //let result:ServiceResponseType=handleApi();
-          //axios.get("http://localhost:8000/groups/")
-	  
-          getAllGroupAttributes().then(response1 => {
-             if (response1.data) {
-                 getAllGroups()
-                 .then (data1 => {
-                      setFormServiceData(data1);
-                 }
-             } else {
-               createGroup().then ()
-             }
-       //let code:number=response.status, error="", data:JsonServiceType=JSON.stringify(response.json);
-       //let code:number=response.status, error="", data:JsonServiceType=JSON.stringify(response.data);
-       //result={code:code,error:error, data:data};
-       //return {code, error, data};
+        
+        //might need to move it to event handler
+          let result:ServiceResponseType=handleApi(inputData);
 
-         }
-    )
-    .catch(err => {
-        let code:number=500, error:string ="unexpected error occured";
-        //result={code:code, error:error, data:initialData};
-        //return {code, error, data}
-        setFormServiceError(error);
-    });
-    //return result;
-  };**/
+        
 
-          //setFormServiceData(result);
-          //console.log(result)
-          //if (result.code) {
-             //setFormServiceStatus(result.code);
-          //}
-          //if (result && result.error) {
-             //result && result.error && setFormServiceError(result.error);
-          //}
-          //if (result.data) {
-             //result && result.data && setFormServiceData(result);
-          //}
-   // }
-          //done form submission
+             let {code, error, data} = {...result};
+
+              !!code && setFormServiceStatus(code);
+              !!data && setFormServiceData(data);
+  
+              !error && setFormServiceError(error);
+  
+       
           setIsSubmitting(false);
+       
     
   }, [isSubmitting]);
-
+**/
   
-  const handleOnSubmit  = (event: React.FormEvent<EventTarget>) :void => {
+  function handleOnSubmit(event: React.FormEvent<EventTarget>)  {
     if (event) {
       event.preventDefault();
     }
@@ -94,6 +72,21 @@ export const useFormValidation  = (fieldState:FormStateType )=> {
     //bootstrap required
     //submission is true
     setIsSubmitting(true);
+
+    //let result:ServiceResponseType=handleApi(inputData);
+
+             let {code, error, data} = handleApi(inputData);
+            // {...result};
+             
+              setFormServiceStatus(code);
+              setFormServiceData(data);
+              setFormServiceError(error);
+
+
+    setIsSubmitting(false);
+
+    //using the form input only during the submit for the logic
+
     /** 
     if (formClientStatus) {
       setBootStrapFormValid(event);
@@ -118,11 +111,11 @@ export const useFormValidation  = (fieldState:FormStateType )=> {
 
   return {
     formClientStatus,
+    //inputData,
     handleOnSubmit,
     isSubmitting,
     formServiceStatus,
     formServiceError,
     formServiceData
   }
-
 };

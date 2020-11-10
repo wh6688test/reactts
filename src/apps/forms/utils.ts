@@ -1,59 +1,33 @@
 
-import { ErrorType, CallBackType, ServiceResponseType, JsonServiceType, FormStateType} from '../../components/forms/formTypes';
-//import {ServiceStatusType} from '../../common/Type.d.ts';
-import { listenerCount } from 'process';
-import axios from 'axios';
-/** 
-const submitHandler = (event: => {
-    event.preventDefault();
+import { ServiceResponseType, ServiceDataType, FormStateType} from '../../types/myFormTypes';
 
-    #add className for bootstrap4
-    event.target.className += " was-validated";
-    #enable submit button
-};**/
 
-// calling service side api
-  export function handleApi():JsonServiceType {
-    // stub  api calls
-    const baseUrl="localhost:8000";
-    let initialData={group_id:"", 
-                                group_attribute:{attr1:"", attr2:""},
-                                members:[{member_id:"", rating:-1}]
-                    };
+import {getAllGroups} from '../services/GroupService';
 
-    let result:JsonServiceType={};
-    //{code:-1, error:"", data:initialData};
 
-    //fetch("{{baseUrl}}/groups/", {"method":"GET"})
-    //fetch("http://localhost:8000/groups/", {"method":"GET"})
-    axios.get("http://localhost:8000/groups/")
-    .then (response => {
-       /** 
-       if (!response.ok) {
-         let error="service error occured";
-         result={'code': response.status, 'error':error};
-         return result;
-       } **/
-       /** 
-       response.json().then(jsondata => {
-                result={'code': response.status, data: jsondata};
-                return result;
-               }
-       )**/
-       //let code:number=response.status, error="", data:JsonServiceType=JSON.stringify(response.json);
-       let code:number=response.status, error="", data:JsonServiceType=JSON.stringify(response.data);
-       result={code:code,error:error, data:data};
-       //return {code, error, data};
-
-     }
-    )
-    .catch(err => {
-        let code:number=500, error:string ="unexpected error occured";
-        result={code:code, error:error, data:initialData};
-        //return {code, error, data}
-    });
-    return result;
+// filtering out service data if data retrieved
+  const retrieveGroups  = (inputData:string[]):ServiceResponseType => {
+     
+      //let allGroups:Promise<ServiceResponseType>  = getAllGroups();
+      getAllGroups().then(g => {
+         if ('data' in g ) {
+             //let responseData:Set<ServiceDataType> = 
+                //new Set((
+                  let response1:ServiceResponseType=JSON.parse(JSON.stringify(g));
+                  let responseData:ServiceDataType[]=response1.data;
+                  return responseData.filter( (k:ServiceDataType) => (inputData.includes(k.group_attribute.attr1)) && inputData.includes(k.group_attribute.attr2));
+                //return [{"gid":1}];
+             //return Array.from(responseData);
+         } 
+         return g;
+      });
+      return {code:500, error:"General Error"};
   };
+
+             
+  export function handleApi(inputData:string[]):ServiceResponseType {
+    return retrieveGroups(inputData);
+  }
 
   export const isFormValid  = (state:FormStateType):boolean => {
        
@@ -64,11 +38,11 @@ const submitHandler = (event: => {
        }
 
        return true;
+  }
 
-     //2. if valid form, add className and enable submit, else disable submit
+  export const getInputData  = (state:FormStateType):string[] => {
 
-     
-     //3. return isFormValid status
+    return isFormValid(state) && (Object.values(state)).map(k=>k.value);
 
   }
 

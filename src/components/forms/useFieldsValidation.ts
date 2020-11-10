@@ -1,7 +1,7 @@
 import { useState} from 'react';
 import  {ClientErrors} from '../../apps/forms/utils';
 
-import {ErrorType,ValueType, ValidationRules, FieldStateType, FormStateType} from './formTypes';
+import {ErrorType,ValueType, ValidationRules, FieldStateType, FormStateType} from '../../types/myFormTypes';
 
 export const useFieldsValidation  = (initialStates: FormStateType) => {
   // for field validation
