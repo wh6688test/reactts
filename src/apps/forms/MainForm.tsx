@@ -305,18 +305,16 @@ const MainForm = () => {
           </MDBCol>
           <MDBCol>
          
-                <MDBBtn color="primary" type="submit" name="submit" onClick={handleOnSubmit} disabled={(isInitial?true:!formClientStatus) && !isSubmitting}>Submit</MDBBtn>
+                <MDBBtn color="primary" type="submit" name="submit" onClick={handleOnSubmit} disabled={isInitial?true:(!formClientStatus && !isSubmitting)?true:false}>Submit</MDBBtn>
               
           </MDBCol>
         </MDBRow>
 </MDBFormInline>
  </MDBContainer>
 
-   {!isSubmitting && !formServiceError && formServiceData.length!==0 && <MDBDataTableV5 hover striped bordered data={datatable}/>}
-  
-   { (formServiceError ||  formServiceError.length>0) && <ErrorPage/>}
-  
+     <div><p>{formServiceData}</p></div>
 
+   { (formServiceError ||  formServiceError.length>0) && <ErrorPage/>}
 
 </>
 

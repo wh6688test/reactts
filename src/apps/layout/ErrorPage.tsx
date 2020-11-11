@@ -2,7 +2,7 @@ import React from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Divider from '../../components/commons/Divider';
-import {errorDisplay} from '../../assets/scss/App.scss';
+import '../../assets/styles/scss/App.scss';
 
 function ErrorPage() {
     return (

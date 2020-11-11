@@ -19,8 +19,8 @@ export const useFormValidation  = (fieldState:FormStateType )=> {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formServiceError, setFormServiceError] = useState("");
   const [formServiceStatus, setFormServiceStatus] = useState(-1);
-  const [formServiceData, setFormServiceData] = useState<ServiceDataType[]>(
-                              []);
+  const [formServiceData, setFormServiceData] = useState(
+                              "");
                           
 
   //const {fieldStates, setClientStatus, handleOnChange}
@@ -72,16 +72,27 @@ export const useFormValidation  = (fieldState:FormStateType )=> {
     //bootstrap required
     //submission is true
     setIsSubmitting(true);
+   
+      handleApi(inputData).then( result => {
+         
+             //let {code, error, data} = handleApi(inputData);
+            console.log("WHSU : result", result);
 
-    //let result:ServiceResponseType=handleApi(inputData);
+            let {code, error, data} = {...result};
 
-             let {code, error, data} = handleApi(inputData);
-            // {...result};
-             
-              setFormServiceStatus(code);
-              setFormServiceData(data);
-              setFormServiceError(error);
+             console.log("WHSU : code", code);
+               console.log("WHSU : error", error);
+              //let data1:ServiceDataType[] = data;
+              let data1:string=JSON.stringify(data);
+              (code !== -1) && setFormServiceStatus(code);
+              (!!error && error !== "") &&  setFormServiceError(error);
 
+              if (data1 && data1.length !== 0) {
+                  setFormServiceData(data1);
+                 //setFormServiceData(data1);
+              }
+              //setFormServiceError(error);
+      });
 
     setIsSubmitting(false);
 

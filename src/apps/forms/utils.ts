@@ -6,26 +6,23 @@ import {getAllGroups} from '../services/GroupService';
 
 
 // filtering out service data if data retrieved
-  const retrieveGroups  = (inputData:string[]):ServiceResponseType => {
+  const retrieveGroups  = async (inputData:string[]):Promise<ServiceResponseType> => {
      
-      //let allGroups:Promise<ServiceResponseType>  = getAllGroups();
-      getAllGroups().then(g => {
-         if ('data' in g ) {
-             //let responseData:Set<ServiceDataType> = 
-                //new Set((
+
+      return await getAllGroups().then(g => {
+         
                   let response1:ServiceResponseType=JSON.parse(JSON.stringify(g));
                   let responseData:ServiceDataType[]=response1.data;
-                  return responseData.filter( (k:ServiceDataType) => (inputData.includes(k.group_attribute.attr1)) && inputData.includes(k.group_attribute.attr2));
-                //return [{"gid":1}];
-             //return Array.from(responseData);
-         } 
-         return g;
+                  responseData=responseData.filter( (k:ServiceDataType) => (inputData.includes(k.group_attribute.attr1)) && inputData.includes(k.group_attribute.attr2));
+               
+                  return Promise.resolve({code: response1.code, data: responseData, error:response1.error});
+                
       });
-      return {code:500, error:"General Error"};
+     
   };
 
              
-  export function handleApi(inputData:string[]):ServiceResponseType {
+  export async function handleApi(inputData:string[]):Promise<ServiceResponseType> {
     return retrieveGroups(inputData);
   }
 
