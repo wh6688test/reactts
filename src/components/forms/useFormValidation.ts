@@ -2,25 +2,29 @@ import { isFormValid, getInputData, handleApi} from '../../apps/forms/utils';
 //https://upmostly.com/tutorials/form-validation-using-custom-react-hooks
 //https://github.com/Upmostly/custom-react-hooks-form-validation
 
+//https://www.smashingmagazine.com/2020/07/custom-react-hook-fetch-cache-data/
+
 import { useState, useEffect} from 'react';
-import { FormStateType, ServiceDataType, ServiceResponseType} from '../../types/myFormTypes';
+import { FormStateType, ServiceDataType, ServiceResponseType, GroupType} from '../../types/myFormTypes';
 //import axios from "axios";
 //import {axiosInstance} from "../../"
 
 //import axios from 'axios';
 //import {getAllGroups} from '../../apps/services/GroupService';
 
+//need to rework
 export const useFormValidation  = (fieldState:FormStateType )=> {
 
   
    //const [errors, setErrors] = useState([]);
-  const [inputData, setInputData] = useState([]);
+  const [inputData, setInputData] = useState<string[]>([]);
   const [formClientStatus, setFormClientStatus] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formServiceError, setFormServiceError] = useState("");
   const [formServiceStatus, setFormServiceStatus] = useState(-1);
-  const [formServiceData, setFormServiceData] = useState(
-                              "");
+  //const [formServiceData, setFormServiceData] = useState<ServiceDataType[]>(
+                           //  []);
+  const [groupData, setGroupData] = useState<string[]>([]);
                           
 
   //const {fieldStates, setClientStatus, handleOnChange}
@@ -38,31 +42,18 @@ export const useFormValidation  = (fieldState:FormStateType )=> {
     //setFormClientStatus(formValid);
   }, [fieldState]);
   
-  /**
+  /** 
   useEffect(() => {
     
-    if (isSubmitting) {
-        
-        //might need to move it to event handler
-          let result:ServiceResponseType=handleApi(inputData);
-
-        
-
-             let {code, error, data} = {...result};
-
-              !!code && setFormServiceStatus(code);
-              !!data && setFormServiceData(data);
-  
-              !error && setFormServiceError(error);
-  
-       
-          setIsSubmitting(false);
-       
     
-  }, [isSubmitting]);
-**/
+    
+  }, [groupData]);**/
+
   
+    
+
   function handleOnSubmit(event: React.FormEvent<EventTarget>)  {
+
     if (event) {
       event.preventDefault();
     }
@@ -76,22 +67,26 @@ export const useFormValidation  = (fieldState:FormStateType )=> {
       handleApi(inputData).then( result => {
          
              //let {code, error, data} = handleApi(inputData);
-            console.log("WHSU : result", result);
 
             let {code, error, data} = {...result};
 
-             console.log("WHSU : code", code);
-               console.log("WHSU : error", error);
               //let data1:ServiceDataType[] = data;
-              let data1:string=JSON.stringify(data);
-              (code !== -1) && setFormServiceStatus(code);
+              //let data1:string=JSON.stringify(data);
+               (code !== -1) && setFormServiceStatus(code);
               (!!error && error !== "") &&  setFormServiceError(error);
 
-              if (data1 && data1.length !== 0) {
-                  setFormServiceData(data1);
-                 //setFormServiceData(data1);
+              if (data && data.length !== 0) {
+                  //setFormServiceData(data);
+                  let groupData1:string[]=data.map((g:ServiceDataType) => 
+                    (JSON.stringify({group_id:g.group_id, attr1: g.group_attribute.attr1, attr2: g.group_attribute.attr2, member_count: g.members?g.members.length:0})));
+        
+                  setGroupData(groupData1);
+                  
+              } else {
+                setGroupData([]);
               }
-              //setFormServiceError(error);
+
+            
       });
 
     setIsSubmitting(false);
@@ -104,7 +99,7 @@ export const useFormValidation  = (fieldState:FormStateType )=> {
       //setFormClientStatus(true)
     }**/
     
-  }
+  };
   /**
   const handleOnBlur :{}= (event:React.MouseEvent)  => {
     if (event) {
@@ -127,6 +122,7 @@ export const useFormValidation  = (fieldState:FormStateType )=> {
     isSubmitting,
     formServiceStatus,
     formServiceError,
-    formServiceData
+    //formServiceData,
+    groupData,
   }
 };

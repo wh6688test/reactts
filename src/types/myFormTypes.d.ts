@@ -32,6 +32,14 @@ export type GroupAttributeType = {
    attr1:string;
    attr2:string
 }
+
+export type GroupType = {
+   group_id:string;
+   attr1: string;
+   attr2:string;
+   member_count?:number;
+}
+
 export interface MemberType {
    member_id: string,
    rating:number

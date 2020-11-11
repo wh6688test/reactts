@@ -12,6 +12,10 @@ input::placeholder {
   text-align: center;
 }
 
+.scroll {
+  overflow: scroll;
+}
+
 .hint-center {
   display: inline-block;
   margin: 5px;

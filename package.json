@@ -12,7 +12,6 @@
     "@types/react-dom": "^16.9.8",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
-    "mdbreact": "^4.6.1",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
@@ -44,6 +43,7 @@
     "@testing-library/cypress": "^7.0.1",
     "@types/testing-library__cypress": "^5.0.8",
     "cypress": "^5.5.0",
+    "mdbreact": "^4.6.1",
     "react-hook-form": "^5.7.2",
     "typescript": "^3.7.5"
   }

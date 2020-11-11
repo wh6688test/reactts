@@ -6,7 +6,6 @@ import { ServiceResponseType} from '../../types/myFormTypes';
 export const getAllGroups = async ():Promise<ServiceResponseType> => {
    
      return await axiosInstance1.get("/groups").then (response => {
-    
             return Promise.resolve({code:response.status, error: "", data:response.data});
      }
 

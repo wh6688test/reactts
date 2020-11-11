@@ -6,12 +6,10 @@ import '../../assets/styles/scss/App.scss';
 
 function ErrorPage() {
     return (
-       <>
-       <Divider/>
+      
        <div>
           <h1 className="errorDisplay">Something Went Wrong</h1>
        </div>
-       </>
       
     );
 }

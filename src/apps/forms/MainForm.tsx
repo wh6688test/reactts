@@ -16,25 +16,21 @@ import {
 
 import {useFieldsValidation} from '../../components/forms/useFieldsValidation';
 import {useFormValidation} from '../../components/forms/useFormValidation';
-//import {FormStateType, FieldStateType, MemberType} from '../../types/myFormTypes';
+import {GroupType} from '../../types/myFormTypes';
 
 import { ClientHints} from './utils';
 //import Divider from '../../components/commons/Divider';
 import ErrorPage from '../layout/ErrorPage';
 import Divider from '../../components/commons/Divider';
+import Body from '../layout/Body';
+//import Divider from '../../components/commons/Divider';
 
 //import MemberComponent from './MemberComponent';
 
 
 const MainForm = () => {
+
   
-/** 
-  const initialErrors = {
-    input1: [],
-    input2: [],
-    input3: [],
-    input4: []
-  };**/
 
   const initialStates = {
     input1: {value: "", error:"", dirty:false},
@@ -43,233 +39,90 @@ const MainForm = () => {
     input4: {value: "", error:"", dirty:false},
   };
 
-  let initialFieldStates = {value:"", error:"", dirty:false};
   
-  const fieldValidationRules = {
-    input1: {
-      minLength: 1,
-      maxLength: 25,
-      pattern: {
-        regExp: /^[a-zA-Z]+$/,
-        error: 'characters only',
-      },
-    },
-    input2: {
-      minLength: 1,
-      maxLength: 25,
-    },
-    input3: {
-      minLength: 1,
-      maxLength: 25,
-    },
-    input4: {
-      required: true,
-      minLength: 1,
-      maxLength: 25,
-    },
-    input5: {
-    },
-  };
-      
   const {isInitial, fieldState, handleOnChange, handleOnBlur, handleOnClick}=useFieldsValidation(initialStates);
 
   //let {formClientStatus, handleOnSubmit, isSubmitting, formServiceError, formServiceData}={false, null, false, {}, {}};
-  let {formClientStatus, handleOnSubmit, isSubmitting, formServiceStatus, formServiceError, formServiceData} = useFormValidation(fieldState);
- 
-  /** 
-  const groupId=formServiceData.map( (data1, i) => (
-       formServiceData[i].group_id
+    let {formClientStatus, handleOnSubmit, isSubmitting, formServiceStatus, formServiceError, groupData}= useFormValidation(fieldState);
+  
+  
+  //const formServiceData1=JSON.parse(JSON.stringify(formServiceData));
+  //const [datatable, setDatatable] = useState({});
+
+/** 
+  const groupId=formServiceData1.map( (data1, i) => (
+       data1.group_id
        //Object.keys(formServiceData).map((key) => (
        //formServiceData[key].group_id
   ));
 
-  const group_attr1=formServiceData.map( (data1, i) => (
-       formServiceData[i].group_attribute.attr1
+  const group_attr1=formServiceData1.map( (data1, i) => (
+       data1.group_attribute.attr1
        //Object.keys(formServiceData).map((key) => (
        //formServiceData[key].group_id
   ));
 
-  const group_attr2=formServiceData.map( (data1, i) => (
-       formServiceData[i].group_attribute.attr2
+  const group_attr2=formServiceData1.map( (data1, i) => (
+       data1.group_attribute.attr2
        //Object.keys(formServiceData).map((key) => (
        //formServiceData[key].group_id
   ));
-  const members2=formServiceData.map( (data1, i) => (
+  const members2=formServiceData1.map( (data1, i) => (
         data1.members
        //Object.keys(formServiceData).map((key) => (
        //formServiceData[key].group_id
-  ));
+  ));**/
   
-  
-  let members:any[]= [{group_id: groupId,
-        group_attr1: group_attr1,
-        group_attr2: group_attr2, 
-        }];
-**/
-
-        /** 
-  let allobject1:Object={group_id: groupId,
-        group_attr1: group_attr1,
-        group_attr2: group_attr2
-       };**/
-  let allobject:any[]=[];
-        //group_attr1: group_attr1,
-        //group_attr2: group_attr2);
-  /** 
-  members.map( (m, i) => (Object.keys(members[i]).map(k=>(allobject.push({group_id: groupId,
-        group_attr1: group_attr1,
-        group_attr2: group_attr2, member_id:members[i][k].member_id, rating:members[i][k].rating})))));
- **/
-
-  
-   
-
-  //members2.map( (m, i) => (Object.keys(members2[i]).map(k=>(members.push({member_id:members2[i][k].member_id, rating:members2[i][k].rating})))));
-  //allobject=members;
-    /** 
-   allobject=[{group_id: groupId,
-        group_attr1: group_attr1,
-        group_attr2: group_attr2, 
-        }];
-   **/
-        /**
-   allobject.push
-       {group_id: groupId,
-        group_attr1: group_attr1,
-        group_attr2: group_attr2,
-        members[0]
-       }**/
-  //allobject=members;
-
-  const datatable={
+  /*
+  const datatable = {
      columns : [
        {label : 'group',
         field: "group_id",
         sort: 'asc',
        },
        {label : 'group_attr1',
-       field : 'group_attr1'},
+       field: 'group_attr1'},
 
        {label : 'group_attr2',
        field : 'group_attr2'},
+     ]
+  };*/
 
-       {label : 'member_id',
-        field:  "member_id",
-       },
+/**
+const [datatable, setDatatable]=useState<string>("");
 
-       {label : 'rating',
-        field:  "rating",
-       },
-     ],
-    
-     rows: 
-      allobject
-    
-  }
+useEffect (() => {
+    let data1={rows: (groupData.map(g => g?JSON.parse(g):{}));
+    setDatatable(({...dataTitle, ...data1}.toString());
+});**/
 
-  const membertable={
-      columns : [
-       {label : 'group',
-        field: "group_id",
-        sort: 'asc',
-       },
-       {label : 'group_attr1',
-       field : 'group_attr1'},
-
-       {label : 'group_attr2',
-       field : 'group_attr2'},
-
-       {label : 'member_id',
-        field:  "member_id",
-       },
-
-       {label : 'rating',
-        field:  "rating",
-       },
-     ],
-     rows:  
-       [allobject]
-  }
-
-/** 
-  
-  let datalist:JsonServiceType[]=[];
-  for (let key1 in formServiceData) {
-        let data1:JsonServiceType;
-        const group1=formServiceData.group_id;
-
-        data1.group_id=group1;
-
-  }**/
-
-  /** 
-  const [datatable, setDatatable] = React.useState({
+const datatable=({
     columns: [
-      {
-        label: 'MemberId',
-        field: 'member_id',
-        width: 150,
-        attributes: {
-          'aria-controls': 'DataTable',
-          'aria-label': 'MemberId',
-        },
-      },
-      {
-        label: 'Rating',
-        field: 'rating',
-        width: 270,
+       {
+        label: 'GroupId',
+        field: 'group_id',
+        sort: 'asc',
       },
       {
         label: 'GroupAttribute1',
         field: 'attr1',
-        sort: 'asc',
-        width: 100,
+        sort: 'disabled',
       },
       {
         label: 'GroupAttribute2',
         field: 'attr2',
         sort: 'disabled',
-        width: 150,
       },
+
       {
-        label: 'GroupId',
-        field: 'group_id',
+        label: 'MemberCount',
+        field: 'member_count',
         sort: 'disabled',
-        width: 100,
       },
     ],
-    
-    
-    rows: [
-      {
-        member_id: formServiceData.members[0].member_id,
-        rating: formServiceData.members[0].rating,
-        attr1: formServiceData.group_attribute,
-        attr2: formServiceData.group_attribute.attr2,
-        group_id: formServiceData.group_id,
-      },
-      
-      {
-        name: 'Paul Byrd',
-        position: 'Chief Financial Officer (CFO)',
-        office: 'New York',
-        age: '64',
-        date: '2010/06/09',
-        salary: '$725',
-      },
-      {
-        name: 'Gloria Little',
-        position: 'Systems Administrator',
-        office: 'New York',
-        age: '59',
-        date: '2009/04/10',
-        salary: '$237',
-      },
-    ],
-    
-  });
-  **/
-  
+    rows: (!groupData || groupData.length===0)?[]:groupData.map(g => g?JSON.parse(g):{}),
+});
+
   return (
   <>
     <MDBContainer className="fluid">
@@ -305,19 +158,22 @@ const MainForm = () => {
           </MDBCol>
           <MDBCol>
          
-                <MDBBtn color="primary" type="submit" name="submit" onClick={handleOnSubmit} disabled={isInitial?true:(!formClientStatus && !isSubmitting)?true:false}>Submit</MDBBtn>
+        <MDBBtn color="primary" type="submit" name="submit" onClick={handleOnSubmit} disabled={isInitial?true:(!formClientStatus && !isSubmitting)?true:false}>Submit</MDBBtn>
               
           </MDBCol>
         </MDBRow>
 </MDBFormInline>
+  
  </MDBContainer>
 
-     <div><p>{formServiceData}</p></div>
+ <Divider/>
+    { (formServiceError ||  formServiceError.length>0) && <ErrorPage/>}
 
-   { (formServiceError ||  formServiceError.length>0) && <ErrorPage/>}
+   {(formServiceStatus === 200) && <div className="scroll"><MDBDataTableV5 hover striped bordered pagesAmount={4} data={datatable}/></div>}
 
+   { (!formServiceStatus || formServiceStatus===-1) && <Body/>}
 </>
-
+    
   )
 }
 

@@ -11,11 +11,11 @@ import {getAllGroups} from '../services/GroupService';
 
       return await getAllGroups().then(g => {
          
-                  let response1:ServiceResponseType=JSON.parse(JSON.stringify(g));
-                  let responseData:ServiceDataType[]=response1.data;
+                  //let response1:ServiceResponseType=JSON.parse(JSON.stringify(g));
+                  let responseData:ServiceDataType[]=((g && g.data)?g.data:[]);
                   responseData=responseData.filter( (k:ServiceDataType) => (inputData.includes(k.group_attribute.attr1)) && inputData.includes(k.group_attribute.attr2));
                
-                  return Promise.resolve({code: response1.code, data: responseData, error:response1.error});
+                  return Promise.resolve({code: g.code, data: responseData, error:g.error});
                 
       });
      
@@ -39,7 +39,7 @@ import {getAllGroups} from '../services/GroupService';
 
   export const getInputData  = (state:FormStateType):string[] => {
 
-    return isFormValid(state) && (Object.values(state)).map(k=>k.value);
+     return isFormValid(state)? (Object.values(state)).map(k=>k.value):[];
 
   }
 
