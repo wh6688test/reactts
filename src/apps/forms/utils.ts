@@ -14,7 +14,10 @@ import {getAllGroups} from '../services/GroupService';
                   //let response1:ServiceResponseType=JSON.parse(JSON.stringify(g));
                   let responseData:ServiceDataType[]=((g && g.data)?g.data:[]);
                   responseData=responseData.filter( (k:ServiceDataType) => (inputData.includes(k.group_attribute.attr1)) && inputData.includes(k.group_attribute.attr2));
-               
+                  
+                  if (!!responseData && responseData.length>0)  {
+                      responseData=Array.from(new Set(responseData));
+                  }
                   return Promise.resolve({code: g.code, data: responseData, error:g.error});
                 
       });

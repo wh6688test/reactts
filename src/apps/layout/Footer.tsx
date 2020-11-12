@@ -10,7 +10,7 @@ function Footer(/*props*/) {
       <footer id="footer">
        <Navbar expand="lg"  className="bg-light Foot">
   
-        <Nav className="Foot" activeKey="home">
+        <Nav className="footer1" activeKey="home">
           <NavItem>
             <Nav.Link href="/privacy" title="privacy" data-testid="footer_privacy_link">
                Privacy Policies

@@ -8,29 +8,23 @@
 //https://stackoverflow.com/questions/54633690/how-can-i-use-multiple-refs-for-an-array-of-elements-with-hooks
 //filed validation
 //display json data : https://forum.freecodecamp.org/t/accessing-json-object-within-an-object/171447/3
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import {
-  MDBContainer, MDBRow, MDBCol, MDBBtn, MDBDataTableV5, MDBFormInline
+  MDBContainer, MDBRow, MDBCol, MDBBtn, MDBFormInline, MDBDataTableV5
 } from 'mdbreact';
 
 import {useFieldsValidation} from '../../components/forms/useFieldsValidation';
 import {useFormValidation} from '../../components/forms/useFormValidation';
-import {GroupType} from '../../types/myFormTypes';
 
 import { ClientHints} from './utils';
-//import Divider from '../../components/commons/Divider';
+
 import ErrorPage from '../layout/ErrorPage';
 import Divider from '../../components/commons/Divider';
 import Body from '../layout/Body';
-//import Divider from '../../components/commons/Divider';
-
-//import MemberComponent from './MemberComponent';
 
 
 const MainForm = () => {
-
-  
 
   const initialStates = {
     input1: {value: "", error:"", dirty:false},
@@ -39,64 +33,11 @@ const MainForm = () => {
     input4: {value: "", error:"", dirty:false},
   };
 
-  
   const {isInitial, fieldState, handleOnChange, handleOnBlur, handleOnClick}=useFieldsValidation(initialStates);
 
-  //let {formClientStatus, handleOnSubmit, isSubmitting, formServiceError, formServiceData}={false, null, false, {}, {}};
-    let {formClientStatus, handleOnSubmit, isSubmitting, formServiceStatus, formServiceError, groupData}= useFormValidation(fieldState);
-  
-  
-  //const formServiceData1=JSON.parse(JSON.stringify(formServiceData));
-  //const [datatable, setDatatable] = useState({});
+  const {formClientStatus, handleOnSubmit, isSubmitting, formServiceStatus, formServiceError, groupData}= useFormValidation(fieldState);
 
-/** 
-  const groupId=formServiceData1.map( (data1, i) => (
-       data1.group_id
-       //Object.keys(formServiceData).map((key) => (
-       //formServiceData[key].group_id
-  ));
-
-  const group_attr1=formServiceData1.map( (data1, i) => (
-       data1.group_attribute.attr1
-       //Object.keys(formServiceData).map((key) => (
-       //formServiceData[key].group_id
-  ));
-
-  const group_attr2=formServiceData1.map( (data1, i) => (
-       data1.group_attribute.attr2
-       //Object.keys(formServiceData).map((key) => (
-       //formServiceData[key].group_id
-  ));
-  const members2=formServiceData1.map( (data1, i) => (
-        data1.members
-       //Object.keys(formServiceData).map((key) => (
-       //formServiceData[key].group_id
-  ));**/
-  
-  /*
-  const datatable = {
-     columns : [
-       {label : 'group',
-        field: "group_id",
-        sort: 'asc',
-       },
-       {label : 'group_attr1',
-       field: 'group_attr1'},
-
-       {label : 'group_attr2',
-       field : 'group_attr2'},
-     ]
-  };*/
-
-/**
-const [datatable, setDatatable]=useState<string>("");
-
-useEffect (() => {
-    let data1={rows: (groupData.map(g => g?JSON.parse(g):{}));
-    setDatatable(({...dataTitle, ...data1}.toString());
-});**/
-
-const datatable=({
+  const datatable=({
     columns: [
        {
         label: 'GroupId',
@@ -113,7 +54,6 @@ const datatable=({
         field: 'attr2',
         sort: 'disabled',
       },
-
       {
         label: 'MemberCount',
         field: 'member_count',
@@ -121,7 +61,7 @@ const datatable=({
       },
     ],
     rows: (!groupData || groupData.length===0)?[]:groupData.map(g => g?JSON.parse(g):{}),
-});
+   });
 
   return (
   <>
@@ -167,14 +107,13 @@ const datatable=({
  </MDBContainer>
 
  <Divider/>
-    { (formServiceError ||  formServiceError.length>0) && <ErrorPage/>}
-
-   {(formServiceStatus === 200) && <div className="scroll"><MDBDataTableV5 hover striped bordered pagesAmount={4} data={datatable}/></div>}
-
+ 
+    { (formServiceError ||  formServiceError.length>0) && <ErrorPage/>};
+    <MDBContainer className="fluid">
+    {(formServiceStatus === 200) && <div className="group1"><MDBDataTableV5 scroll hover striped bordered entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={datatable}/></div>}
+    </MDBContainer>
    { (!formServiceStatus || formServiceStatus===-1) && <Body/>}
 </>
-    
-  )
+  );
 }
-
 export default MainForm;

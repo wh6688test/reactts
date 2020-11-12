@@ -37,7 +37,7 @@ describe('Input filed test without submit yet', () => {
       .should('be.disabled');
 
     
-    cy.get("input").should("have.length", 4)
+    cy.get("#wform1").get("input").should("have.length", 4)
     .each(($el, index, $list) => {
        cy.wrap($el).should("have.attr", "placeholder");
     });

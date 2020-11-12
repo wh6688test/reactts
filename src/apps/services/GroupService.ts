@@ -1,5 +1,5 @@
 //https://medium.com/@trekinbami/using-environment-variables-in-react-6b0a99d83cf5
-import {properties} from '../properties/app';
+//import {properties} from '../properties/app';
 import axiosInstance1 from './serviceConfig';
 import { ServiceResponseType} from '../../types/myFormTypes';
 
