@@ -4,7 +4,7 @@ function ErrorPage() {
     return (
       
        <div>
-          <h1 className="errorDisplay">Something Went Wrong</h1>
+          <h1 id="error" className="errorDisplay">Something Went Wrong</h1>
        </div>
       
     );

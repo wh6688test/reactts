@@ -1,6 +1,8 @@
+//https://react-hook-form.com/advanced-usage/
+//https://stackoverflow.com/questions/55565444/how-to-register-event-with-useeffect-hooks
 import { isFormValid, getInputData, handleApi} from '../../apps/forms/utils';
 
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useCallback} from 'react';
 import { FormStateType, ServiceDataType } from '../../types/myFormTypes';
 
 //need to rework
@@ -22,33 +24,32 @@ export const useFormValidation  = (fieldState:FormStateType )=> {
     setInputData(getInputData(fieldState));
   }, [fieldState]);
   
+  
+  const handleOnSubmit=useCallback( (event1:React.FormEvent<EventTarget>) => {
 
-
-  function handleOnSubmit(event: React.FormEvent<EventTarget>)  {
-    if (event) {
-      event.preventDefault();
-    }
+     if (event1) {
+      event1.preventDefault();
+     }
+      
       setIsSubmitting(true);
 
       handleApi(inputData).then( result => {
          
             let {code, error, data} = {...result};
-
             (code !== -1) && setFormServiceStatus(code);
-            (!!error && error !== "") &&  setFormServiceError(error);
+            setFormServiceError((!!error && error!=="")?error:"");
 
             if (data && data.length !== 0) {
                 //simplify data passing and reuse
                 let groupData1:string[]=data.map((g:ServiceDataType) => 
                     (JSON.stringify({group_id:g.group_id, attr1: g.group_attribute.attr1, attr2: g.group_attribute.attr2, member_count: g.members?g.members.length:0})));
                   setGroupData(groupData1);
-                  
             } else {
                 setGroupData([]); 
             }
      });
-     reset();
-   }
+     return () => reset();
+   }, [isSubmitting, fieldState]);
 
   //could add more reset later
   const reset = () =>{

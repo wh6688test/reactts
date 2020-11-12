@@ -110,7 +110,7 @@ const MainForm = () => {
  
     { (formServiceError ||  formServiceError.length>0) && <ErrorPage/>};
     <MDBContainer className="fluid">
-    {(formServiceStatus === 200) && <div className="group1"><MDBDataTableV5 scroll hover striped bordered entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={datatable}/></div>}
+    {(formServiceStatus === 200) && <div className="group1"><MDBDataTableV5 hover striped bordered entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={datatable}/></div>}
     </MDBContainer>
    { (!formServiceStatus || formServiceStatus===-1) && <Body/>}
 </>
