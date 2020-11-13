@@ -5,7 +5,6 @@ import { isFormValid, getInputData, handleApi} from '../../apps/forms/utils';
 import { useState, useEffect, useCallback} from 'react';
 import { FormStateType, ServiceDataType } from '../../types/myFormTypes';
 
-//need to rework
 export const useFormValidation  = (fieldState:FormStateType )=> {
 
   const [inputData, setInputData] = useState<string[]>([]);
