@@ -40,28 +40,28 @@ const MainForm = () => {
   const datatable=({
     columns: [
        {
-        label: 'GroupId',
+        label: 'group id',
         field: 'group_id',
         sort: 'asc',
       },
       {
-        label: 'GroupAttribute1',
+        label: 'group type1',
         field: 'attr1',
         sort: 'disabled',
       },
       {
-        label: 'GroupAttribute2',
+        label: 'group type2',
         field: 'attr2',
         sort: 'disabled',
       },
       {
-        label: 'MemberCount',
+        label: 'member count',
         field: 'member_count',
         sort: 'disabled',
       },
     ],
     rows: (!groupData || groupData.length===0)?[]:groupData.map(g => g?JSON.parse(g):{}),
-   });
+   })
 
   return (
   <>
@@ -110,7 +110,7 @@ const MainForm = () => {
  
     { (formServiceError ||  formServiceError.length>0) && <ErrorPage/>};
     <MDBContainer className="fluid">
-    {(formServiceStatus === 200) && <div className="group1"><MDBDataTableV5 hover striped bordered entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={datatable}/></div>}
+    {(formServiceStatus === 200) && <MDBDataTableV5 hover striped bordered entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={datatable}/>}
     </MDBContainer>
    { (!formServiceStatus || formServiceStatus===-1) && <Body/>}
 </>

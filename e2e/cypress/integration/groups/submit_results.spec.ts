@@ -2,72 +2,93 @@
 //@ts-check
 
 describe('SubmitTest', () => {
+
+   const {datatable1, datatitle, datarows, submitButton} = {
+    datatable1: '[data-test="datatable"]',
+    datatitle:'[data-test="datatable-head"]',
+    datarows:'[data-test="table-body"]',
+    submitButton: 'button[type="submit"]',
+  };
+
   beforeEach(() => {
     cy.visit('/')
 
     // load example.json fixture file and store
     // in the test context object
     cy.fixture('groups.json').as('groups');
-    cy.fixture('group.json').as('group');
-    cy.fixture('groupIn.json').as('groupIn');
     cy.server();
   });
 
-  it('successfully created group', ()=>{
-    cy.route(
-      {
-      method: 'POST', 
-      url:'/group', 
-      status:200
-      }).as('postGroup');
-    //obmit the fields entering
-    cy.get('submit').click()
-    cy.wait('@postGroup').its('status').should('eq', 200)
-    .its('responseBody').should('be', '@group');
-    //adding more ui verifications.
-});
-
-it('verify api response group', () => {
-    cy.request('/group?gid=1').then(response=> {
+//check the service is up and running so the expected api data will be retrieved
+it('verify api response groups', () => {
+    cy.request(Cypress.env('apiUrl')+'/groups').then(response=> {
         expect(response.status).to.eq(200);
-        expect(JSON.stringify(response.body).should('deep.eq', "@group"));
+        const body1=response.body   
+        expect(body1).to.exist;
+        const values=Cypress._.entries(body1[0]);
+        expect(JSON.stringify(values)).to.contain("group_attribute")
+        .and.to.contain("group_id");
     });
 });
 
- it('successfully created group', ()=>{
+ it('retrieved empty group', ()=>{
+   //submit button was disabled by default
+    cy.get(submitButton).should('has.attr', 'disabled');
     cy.route(
       {
       method: 'GET', 
-      url:'/group?**', 
+      url:'/groups', 
       status:200,
-      response:'@group'
-      }).as('getGroup');
-    //obmit the fields entering
-    cy.get('submit').click()
-    cy.wait('@getGroup').its('status').should('eq', 200)
-     .its('responseBody')
-      .should('have.property', 'gid')
-      .and('include', 'group data')
+      }).as('groups');
+
+    cy.get('#input1').type('nonexists1');
+    cy.get('#input2').type('nonexists2');
+    cy.get('#input3').type('nonexists3');
+    //submit button is still disabled
+    cy.get(submitButton).should('has.attr', 'disabled');
+    cy.get('#input4').type('nonexists4');
+
+    cy.get(submitButton).should('not.have.attr', 'disabled');
+    cy.get(submitButton).click()
+    cy.wait('@groups');
+
+    //get the page with only title info with empty data retrieved
+
+    cy.get(datatitle).should('exist').get('th').should("have.length", 4)
+    cy.get(datarows).should('contain',  'No matching records found', {matchCase:false});
+    cy.get('#error').should('not.exist');
     
-    //adding more UI verifications
 });
 
-  it('verify api response groups', () => {
-    cy.request('/groups').then(response=> {
-        expect(response.status).to.eq(200);
-        expect(JSON.stringify(response.body).should('deep.eq', "@groups"));
-    });
-  });
+  it('verify groups data are displayed', function() {
+   
+     cy.fixture('groups').as('groupsResponse');
+     cy.route('GET', '/groups', '@groupsResponse').as('getGroups');
 
-  it('cy.fixture() - load a', () => {
-    
-    cy.route('GET', 'groups/*', '@groups').as('getGroups')
-    
-     cy.get('submit').click()
-     cy.wait('@getGroups').its('status').should('eq', 200)
-      .its('responseBody')
-      .should('have.lengthOf', '@groups'.length)
-      .should('deep.equal', '@groups');
-     //adding more UI verifications
+    cy.get('#input1').type('muB2');
+    cy.get('#input2').type('muB3');
+    cy.get('#input3').type('anyother1');
+    cy.get('#input4').type('anyother2');
+    cy.get(submitButton).click()
+    cy.wait('@getGroups');
+
+
+      cy.fixture('groups').then( (groups) => {
+
+        const group=groups[0];
+
+        cy.get(datarows).as("datarow").should('exist');
+        console.log("WHSU s : ", JSON.stringify(groups));
+        console.log("WHSU : 0 ", JSON.stringify(group));
+        console.log("WHSU : attrs : ", JSON.stringify(group.group_attribute.attr1));
+        console.log("WHSU : members : ", JSON.stringify(group.members));
+        console.log("WHSU : id : ", JSON.stringify(group.group_id));
+        cy.get('@datarow').get('tr').should("have.length", groups.length+1)
+        //4 columns
+        cy.get('@datarow').get('td').should('exist').should("have.length",  4)
+        .and('contain',group.group_id).and('contain', group.group_attribute.attr1)
+        .and('contain', group.group_attribute.attr2)
+        .and('contain', group.members.length);
+        })
   });
-  });
+});

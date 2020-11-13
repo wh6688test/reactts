@@ -42,14 +42,14 @@ export const useFormValidation  = (fieldState:FormStateType )=> {
             if (data && data.length !== 0) {
                 //simplify data passing and reuse
                 let groupData1:string[]=data.map((g:ServiceDataType) => 
-                    (JSON.stringify({group_id:g.group_id, attr1: g.group_attribute.attr1, attr2: g.group_attribute.attr2, member_count: g.members?g.members.length:0})));
+                    (JSON.stringify({group_id:g.group_id.trim(), attr1: g.group_attribute.attr1.trim(), attr2: g.group_attribute.attr2.trim(), member_count: g.members?g.members.length:0})));
                   setGroupData(groupData1);
             } else {
                 setGroupData([]); 
             }
      });
      return () => reset();
-   }, [isSubmitting, fieldState]);
+   }, [inputData]);
 
   //could add more reset later
   const reset = () =>{

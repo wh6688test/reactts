@@ -1,79 +1,49 @@
 /// <reference types="cypress" />
+//@ts-check
 
 describe('Viewport', () => {
   beforeEach(() => {
     cy.visit("/");
 
   })
-  
-    it('cy.viewport() - set the viewport size and dimension', () => {
+    //adding more meaningful tests with UI has more features
+    it('changing to different view ports and reload and back and forth', () => {
 
-    cy.get('#navbar').should('be.visible')
     cy.viewport(320, 480)
 
-    // the navbar should have collapse since our screen is smaller
-    cy.get('#navbar').should('not.be.visible')
-    cy.get('.navbar-toggle').should('be.visible').click()
-    cy.get('.nav').find('a').should('be.visible')
-
-    // lets see what our app looks like on a super large screen
     cy.viewport(2999, 2999)
 
-    // cy.viewport() accepts a set of preset sizes
-    // to easily set the screen to a device's width and height
-
-    // We added a cy.wait() between each viewport change so you can see
-    // the change otherwise it is a little too fast to see :)
-
     cy.viewport('macbook-15')
-    cy.wait(200)
+    cy.wait(100)
     cy.viewport('macbook-13')
-    cy.wait(200)
+    cy.wait(100)
     cy.viewport('macbook-11')
-    cy.wait(200)
+    cy.wait(100)
     cy.viewport('ipad-2')
-    cy.wait(200)
+    cy.wait(100)
     cy.viewport('ipad-mini')
-    cy.wait(200)
+    cy.wait(100)
     cy.viewport('iphone-6+')
-    cy.wait(200)
+    cy.wait(100)
     cy.viewport('iphone-6')
-    cy.wait(200)
+    cy.wait(100)
     cy.viewport('iphone-5')
-    cy.wait(200)
+    cy.wait(100)
     cy.viewport('iphone-4')
-    cy.wait(200)
+    cy.wait(100)
     cy.viewport('iphone-3')
-    cy.wait(200)
+    cy.wait(100)
 
-    // cy.viewport() accepts an orientation for all presets
-    // the default orientation is 'portrait'
     cy.viewport('ipad-2', 'portrait')
-    cy.wait(200)
+    cy.wait(100)
     cy.viewport('iphone-4', 'landscape')
-    cy.wait(200)
+    cy.wait(100);
 
-    
-  it('cy.reload() - reload the page', () => {
-    // https://on.cypress.io/reload
-    cy.reload()
-    //adding some  ui verifications
-    // reload the page without using the cache
-    cy.reload(true)
-   //adding more ui verifications
-    //do some assertions here
-
-  });
-    // The viewport will be reset back to the default dimensions
-    // in between tests (the  default can be set in cypress.json)
-  })
-
-   cy.go('back');
-    cy.location('pathname').should('not.include', 'something');
+    cy.reload();
+    cy.reload(true);
+   
+    //cy.go('back').go('forward');
+    cy.getByDataId('footer_note').should('be.visible');
     //adding more verifications
-
-    cy.go('forward');
-    cy.location('pathname').should('include', 'navigation');
-    //adding more verifications
-
-})
+    });
+});
