@@ -78,11 +78,6 @@ it('verify api response groups', () => {
         const group=groups[0];
 
         cy.get(datarows).as("datarow").should('exist');
-        console.log("WHSU s : ", JSON.stringify(groups));
-        console.log("WHSU : 0 ", JSON.stringify(group));
-        console.log("WHSU : attrs : ", JSON.stringify(group.group_attribute.attr1));
-        console.log("WHSU : members : ", JSON.stringify(group.members));
-        console.log("WHSU : id : ", JSON.stringify(group.group_id));
         cy.get('@datarow').get('tr').should("have.length", groups.length+1)
         //4 columns
         cy.get('@datarow').get('td').should('exist').should("have.length",  4)
