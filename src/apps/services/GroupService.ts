@@ -1,10 +1,12 @@
 //https://medium.com/@trekinbami/using-environment-variables-in-react-6b0a99d83cf5
 //import {properties} from '../properties/app';
-import axiosInstance1 from './serviceConfig';
+//https://blog.logrocket.com/async-await-in-typescript/
+import axiosInstance1 from './ServiceConfig';
 import { ServiceResponseType} from '../../types/myFormTypes';
 
 export const getAllGroups = async ():Promise<ServiceResponseType> => {
    
+  
      return await axiosInstance1.get("/groups").then (response => {
             return Promise.resolve({code:response.status, error: "", data:response.data});
      }
@@ -16,24 +18,3 @@ export const getAllGroups = async ():Promise<ServiceResponseType> => {
       
    });
 }
-/** 
-export const getAllGroupAttributes = ():Promise<any> => {
-
-   return axiosInstance1.get("/groups/attributes").then (response => {
-             return response;
-   });
-};
-
-export const getByMemberId = (memberId:string):Promise<any> => {
-  return axiosInstance1.get("/group/member/"+memberId);
-};
-
-export const createGroup = (groupData:Object) => {
-  axiosInstance1.post("/group", groupData);
-
-}
-
-export const updateMemberRating = (groupId:string, updateData:Object ) => {
-  axiosInstance1.put(properties.baseUrl+"/group/"+groupId+"/attr/", updateData);
-}
-**/

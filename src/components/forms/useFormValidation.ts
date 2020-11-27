@@ -39,9 +39,11 @@ export const useFormValidation  = (fieldState:FormStateType )=> {
             setFormServiceError((!!error && error!=="")?error:"");
 
             if (data && data.length !== 0) {
+             
                 //simplify data passing and reuse
                 let groupData1:string[]=data.map((g:ServiceDataType) => 
-                    (JSON.stringify({group_id:g.group_id.trim(), attr1: g.group_attribute.attr1.trim(), attr2: g.group_attribute.attr2.trim(), member_count: g.members?g.members.length:0})));
+                    (JSON.stringify({group_id:g.group_id.trim(), attr1: g.group_attribute.attr1.trim(), attr2: g.group_attribute.attr2.trim(), member_count: g.members && Object.keys(g.members[0]).length!==0?g.members.length:0})));
+                 
                   setGroupData(groupData1);
             } else {
                 setGroupData([]); 

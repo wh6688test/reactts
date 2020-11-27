@@ -1,3 +1,5 @@
+To do : remove using mdbreact : use own ui components
+
 <<<<<<< HEAD
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -45,4 +47,34 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 =======
 # reactts
->>>>>>> 86262e4fa6c562a799c3f42d9560a6309c9a5bab
+
+#Related Links :
+
+ css cheatsheets : 
+
+ https://websitesetup.org/css3-cheat-sheet/
+
+ scss cheatsheets : 
+
+ https://devhints.io/sass
+
+
+
+ Javascript : 
+
+ https://jscomplete.com/learn/javascript-for-react
+ https://medium.com/@leannezhang/curly-braces-versus-parenthesis-in-reactjs-4d3ffd33128f
+
+ React : 
+   https://www.robinwieruch.de/react-function-component
+   https://reactjs.org/docs/composition-vs-inheritance.html : props.children (including text for the element, if any)
+
+ 
+ Hooks and react performance optimization : 
+
+   https://dmitripavlutin.com/dont-overuse-react-usecallback/
+
+   https://stackoverflow.com/questions/58579426/in-useeffect-whats-the-difference-between-providing-no-dependency-array-and-an
+
+   https://dev.to/dinhhuyams/introduction-to-react-memo-usememo-and-usecallback-5ei3
+
