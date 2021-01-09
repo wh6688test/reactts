@@ -17,7 +17,11 @@ yarn build
  scss cheatsheets : 
 
  https://devhints.io/sass
+ styling : 
 
+  https://scotch.io/tutorials/using-sass-in-create-react-app-v2
+
+  npm install node-sass -S
 
  Javascript : 
 
