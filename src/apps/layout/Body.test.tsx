@@ -1,9 +1,13 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from '../../App';
+/**
+ * @jest-environment jsdom
+ */
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import React from 'react';
+import { render, getByTitle, findByTitle} from '@testing-library/react';
+import Body from './Body';
+
+test('test img title', async () => {
+  const { getByTitle } = render(<Body />);
+  const linkElement = await getByTitle("svg image");
+  expect(() => linkElement).toBeTruthy();
 });

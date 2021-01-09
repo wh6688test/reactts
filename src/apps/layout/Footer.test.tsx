@@ -1,9 +1,14 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from 'react';
 import { render } from '@testing-library/react';
-import App from '../../App';
+import Footer from './Footer';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+//adding a snapshot testing
+test('render footer component', async () => {
+
+  const {asFragment} = render(<Footer/>)
+    
+   expect(() => asFragment()).toMatchSnapshot()
 });

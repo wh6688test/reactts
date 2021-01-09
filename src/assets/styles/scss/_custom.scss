@@ -17,14 +17,18 @@ input::placeholder {
 .scroll {
   overflow: scroll;
 }
+
+.col {
+  align-content: center;
+  text-align:center;
+  text-justify: center;
+  align-items: center;
+};
+
 .hint-center {
    display: inline-block;
    margin:5px;
-   align-content: center;
-   text-align:center;
-   text-justify: center;
-   align-items: center;
-   line-height: 100%;
+   line-height: 150%;
    font-size:80%;
    color:purple;
 };

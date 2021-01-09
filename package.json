@@ -4,9 +4,9 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
+    "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^24.0.0",
+    "@types/jest": "^26.0.20",
     "@types/node": "^12.12.47",
     "@types/react": "^16.9.36",
     "@types/react-dom": "^16.9.8",
@@ -45,6 +45,7 @@
     "cypress": "^5.5.0",
     "mdbreact": "^4.6.1",
     "react-hook-form": "^5.7.2",
+    "ts-jest": "^26.4.4",
     "typescript": "^3.7.5"
   }
 }

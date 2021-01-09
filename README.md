@@ -1,54 +1,14 @@
 To do : remove using mdbreact : use own ui components
 
-<<<<<<< HEAD
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+yarn start
+yarn test
+yarn build
 
-## Available Scripts
+(or using npx)
 
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-=======
 # reactts
 
-#Related Links :
+#Reference  Links :
 
  css cheatsheets : 
 
@@ -57,7 +17,6 @@ To learn React, check out the [React documentation](https://reactjs.org/).
  scss cheatsheets : 
 
  https://devhints.io/sass
-
 
 
  Javascript : 
@@ -78,3 +37,58 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
    https://dev.to/dinhhuyams/introduction-to-react-memo-usememo-and-usecallback-5ei3
 
+
+---
+  https://testing-library.com/docs/react-testing-library/cheatsheet
+  https://jestjs.io/docs/en/mock-function-api
+  https://jestjs.io/docs/en/mock-function-api#mockfnmockresolvedvalueoncevalue
+  https://github.com/mrdulin/jest-codelab/blob/master/src/stackoverflow/58273544/index.spec.ts
+
+  https://jestjs.io/docs/en/tutorial-react
+
+  https://kentcdodds.com/blog/stop-mocking-fetch
+
+  https://www.npmjs.com/package/jest-fetch-mock
+
+  https://www.andreasreiterer.at/test-presentational-components-jest/
+
+  https://www.digitalocean.com/community/tutorials/how-to-write-snapshot-tests-for-react-components-with-jest
+
+ https://blog.logrocket.com/comparing-react-testing-libraries/
+ https://www.freecodecamp.org/news/8-simple-steps-to-start-testing-react-apps-using-react-testing-library-and-jest/
+
+Jest Test :  (ts-jest : jest.config.js) : using javascript to test typescript
+   (testcases are javascript)
+
+   Jest Mock : 
+   https://github.com/BulbEnergy/jest-mock-examples/blob/master/globals-mock/mock-globals.test.ts
+  (snap shot of 20 of the assertion types)
+
+  https://blog.echobind.com/writing-functional-tests-with-react-testing-library-part-1-470870ee1a6
+
+  https://medium.com/swlh/jest-with-typescript-446ea996cc68
+
+  https://github.com/rkoziol/react-typescript-jest-boilerplate/blob/master/jest.config.js
+
+  jest with typescript : using typescript to test typescript : 
+
+https://dev.to/muhajirdev/unit-testing-with-typescript-and-jest-2gln
+
+https://testing-library.com/docs/guide-disappearance/
+
+
+https://medium.com/@mtiller/debugging-with-typescript-jest-ts-jest-and-visual-studio-code-ef9ca8644132
+
+https://www.testim.io/blog/what-is-the-difference-between-jest-and-enzyme/
+
+https://testing-library.com/docs/react-testing-library/cheatsheet/
+
+
+
+
+
+
+
+--
+
+ 

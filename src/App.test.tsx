@@ -1,9 +1,12 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import {App} from './App';
+//jest.mock ("./apps/layout/Body");
+//jest.mock ("./apps/forms/MainForm");
 
 test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  const {asFragment} = render(<App/>)
+    
+   expect(() => asFragment()).toMatchSnapshot()
 });

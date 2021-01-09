@@ -1,10 +1,8 @@
 /// <reference types="cypress" />
 //@ts-check
-
 describe('Input filed test without submit yet', () => {
   
-  const {inputPlaceHolder, hintText, submitButton, inputBox} = {
-    inputPlaceHolder: 'input[placeholder]',
+  const {hintText, submitButton, inputBox} = {
     hintText:'label',
     submitButton: 'button[type="submit"]',
     inputBox: "#input",
@@ -24,26 +22,22 @@ describe('Input filed test without submit yet', () => {
     cy.visit('/')
   });
 
-    it('initial input states', () => {
+  it('initial input states', () => {
     // hints exist
     cy.get(hintText).should("have.length", 4)
         .each(($el, index, $list) => {
          expect($el.text().trim()).equal(expectedInputEnter+""+(index+1));
-
-      });
-
-    //submit should be greyed out initially
-    cy.get(submitButton)
-      .should('be.disabled');
-
+        });
     
+    //submit should be greyed out initially
+    cy.get(submitButton).should('be.disabled');
+
     cy.get("#wform1").get("input").should("have.length", 4)
-    .each(($el, index, $list) => {
-       cy.wrap($el).should("have.attr", "placeholder");
+       .each(($el, index, $list) => {
+       cy.wrap($el).should("have.attr", "placeholder", "input" + (index+1));
     });
   });
 
-  
   //it.only('typing in different values for input1', () => {
   it('typing in different values for input1', () => {
   
@@ -100,8 +94,5 @@ describe('Input filed test without submit yet', () => {
 
       cy.get(submitButton)
       .should('not.be.disabled');
-
-      
   });
-
 });

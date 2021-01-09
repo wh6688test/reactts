@@ -1,3 +1,11 @@
+Cypress run  :
+
+   yarn cypress run
+ or 
+   yarn cypress open
+
+(or using npx instead of yarn)
+
 Reference links : 
 
 1. https://basarat.gitbook.io/typescript/intro-1/cypress
